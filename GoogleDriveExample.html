@@ -66,7 +66,7 @@
             var apiKey = 'AIzaSyD2eUYerUuAsE90ezZlsOcAONJme4BSIFU';
             var scopes = ['https://www.googleapis.com/auth/drive.file'];
 
-            function onApiLoad() {
+            function onLoad() {
                 gapi.load('auth', { 'callback': authenticateWithGoogle });
                 gapi.load('picker');
             }
@@ -114,7 +114,7 @@
                 retrievePageOfFiles(initialRequest, []);
             }
         </script>
-        <script src="https://apis.google.com/js/client.js?onload=load"></script>
+        <script src="https://apis.google.com/js/client.js?onload=onLoad"></script>
         <script src="https://apis.google.com/js/platform.js"></script>
         <!-- Google Files list -->
     </body>
