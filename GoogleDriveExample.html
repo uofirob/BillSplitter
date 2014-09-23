@@ -8,7 +8,7 @@
         <!--<div class="g-savetodrive" data-src="<filesource>" data-filename="<filename>" data-sitename="<sitename>"></div>-->
         <!-- /Save to drive example -->
         <!-- Google Picker Example -->
-        <div class="g-picker"></div>
+ <!--       <div class="g-picker"></div>
         <script>
             var oauthToken;
             var clientId = '296656668190-4prn33ndvkceuqufr78se2c2jrm9h25h.apps.googleusercontent.com';
@@ -56,8 +56,66 @@
                 }
             }
         </script>
-        <script src="https://apis.google.com/js/platform.js"></script>
-        <script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>
+        <script type="text/javascript" src="https://apis.google.com/js/api.js?onload=onApiLoad"></script>-->
         <!-- /Google Picker Example -->
+        <!-- Google Files list -->
+        <div id="googleFiles"></div>
+        <script>
+            var oauthToken;
+            var clientId = '296656668190-4prn33ndvkceuqufr78se2c2jrm9h25h.apps.googleusercontent.com';
+            var apiKey = 'AIzaSyD2eUYerUuAsE90ezZlsOcAONJme4BSIFU';
+            var scopes = ['https://www.googleapis.com/auth/drive.file'];
+
+            function onApiLoad() {
+                gapi.load('auth', { 'callback': authenticateWithGoogle });
+                gapi.load('picker');
+            }
+
+            function authenticateWithGoogle() {
+                window.gapi.auth.authorize({
+                    'client_id': clientId,
+                    'scope': scopes
+                }, handleAuthentication);
+            }
+
+
+            function handleAuthentication(authResult) {
+                if (authResult && !authResult.error) {
+                    oauthToken = authResult.access_token;
+                    retrieveAllFiles(filesRetrieved);
+                }
+            }
+
+            function filesRetrieved(data) {
+                
+            }
+
+            /**
+             * Retrieve a list of File resources.
+             *
+             * @param {Function} callback Function to call when the request is complete.
+             */
+            function retrieveAllFiles(callback) {
+                var retrievePageOfFiles = function (request, result) {
+                    request.execute(function (resp) {
+                        result = result.concat(resp.items);
+                        var nextPageToken = resp.nextPageToken;
+                        if (nextPageToken) {
+                            request = gapi.client.drive.files.list({
+                                'pageToken': nextPageToken
+                            });
+                            retrievePageOfFiles(request, result);
+                        } else {
+                            callback(result);
+                        }
+                    });
+                }
+                var initialRequest = gapi.client.drive.files.list();
+                retrievePageOfFiles(initialRequest, []);
+            }
+        </script>
+        <script src="https://apis.google.com/js/client.js?onload=load"></script>
+        <script src="https://apis.google.com/js/platform.js"></script>
+        <!-- Google Files list -->
     </body>
 </html>
