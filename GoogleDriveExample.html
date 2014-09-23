@@ -20,7 +20,7 @@
             }
 
             function onAuthApiLoad() {
-                window.gapi.autoHeight.authorize({
+                window.gapi.auth.authorize({
                     'client_id': clientId,
                     'scope': scopes
                 }, handleAuthResult);
