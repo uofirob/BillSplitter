@@ -15,19 +15,19 @@
             var apiKey = 'AIzaSyD2eUYerUuAsE90ezZlsOcAONJme4BSIFU';
             var scopes = 'https://www.googleapis.com/auth/drive.file';
             function onApiLoad() {
-                gapi.load('auth', { 'callback': onAuthApiLoad });
+                gapi.load('auth', { 'callback': authenticateWithGoogle });
                 gapi.load('picker');
             }
 
-            function onAuthApiLoad() {
+            function authenticateWithGoogle() {
                 window.gapi.auth.authorize({
                     'client_id': clientId,
                     'scope': scopes
-                }, handleAuthResult);
+                }, handleAuthentication);
             }
 
 
-            function handleAuthResult(authResult) {
+            function handleAuthentication(authResult) {
                 if (authResult && !authResult.error) {
                     oauthToken = authResult.access_token;
                     createPicker();
