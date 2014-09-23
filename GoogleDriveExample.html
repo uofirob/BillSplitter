@@ -13,7 +13,8 @@
             var oauthToken;
             var clientId = '296656668190-4prn33ndvkceuqufr78se2c2jrm9h25h.apps.googleusercontent.com';
             var apiKey = 'AIzaSyD2eUYerUuAsE90ezZlsOcAONJme4BSIFU';
-            var scopes = 'https://www.googleapis.com/auth/drive.file';
+            var scopes = ['https://www.googleapis.com/auth/drive.file'];
+
             function onApiLoad() {
                 gapi.load('auth', { 'callback': authenticateWithGoogle });
                 gapi.load('picker');
