@@ -28,7 +28,7 @@
                 }, handleAuthResult);
             }
 
-            
+
             function handleAuthResult(authResult) {
                 if (authResult && !authResult.error) {
                     oauthToken = authResult.access_token;
@@ -53,7 +53,7 @@
                     alert(['URL: ', data.documentScroll[0].url].join(''));
                 }
                 else if (data.action == google.picker.action.CANCEL) {
-                    
+
                 }
             }
         </script>
