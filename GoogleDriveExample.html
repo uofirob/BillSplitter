@@ -37,13 +37,13 @@
 
             function createPicker() {
                 var picker = new google.picker.PickerBuilder()
-                    .addView(new google.picker.DocsUploadView())
-                    .addView(new google.picker.DocsView())
-                    .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
-                    .setCallback(pickerCallback)
                     .setOAuthToken(oauthToken)
                     .setDeveloperKey(apiKey)
-                    .buildFragment();
+                    .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+                    .setCallback(pickerCallback)
+                    .addView(new google.picker.DocsUploadView())
+                    .addView(new google.picker.DocsView())
+                    .build();
                 picker.setVisible(true);
             }
 
